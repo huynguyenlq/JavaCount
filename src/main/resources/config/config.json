@@ -1,0 +1,15 @@
+{
+  "workflow-scheme":
+  {
+    "name": "my.project.template.workflow.scheme.name",
+    "description": "my.project.template.workflow.scheme.description",
+    "default-workflow": "wf1",
+    "workflows": [
+      {
+        "key": "wf1",
+        "name": "my.project.template.workflow.wf1.name",
+        "workflow-bundle": "/Workflow/GLobal-SSC-WF-ver5.jwb"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+<tr>
+    <td class="fieldLabelArea">
+        Word:
+    </td>
+    <table>
+        #foreach(${status} in ${statuses})
+            <tr>
+                <td>
+                    <input type="checkbox" name="${status.getId()}" />
+                </td>
+                <td>
+                    #displayConstantIcon ($status) $status.getName()
+                </td>
+            </tr>
+        #end
+    </table>
+</tr>

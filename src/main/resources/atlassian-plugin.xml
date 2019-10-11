@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2"> 
+  <plugin-info> 
+    <description>${project.description}</description>  
+    <version>${project.version}</version>  
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>  
+    <param name="plugin-icon">images/pluginIcon.png</param>  
+    <param name="plugin-logo">images/pluginLogo.png</param> 
+  </plugin-info>  
+  <!-- add our i18n resource -->  
+  <resource type="i18n" name="i18n" location="AID"/>  
+  <!-- add our web resources -->  
+  <web-resource key="AID-resources" name="AID Web Resources"> 
+    <dependency>com.atlassian.auiplugin:ajs</dependency>  
+    <resource type="download" name="AID.css" location="/css/AID.css"/>  
+    <resource type="download" name="AID.js" location="/js/AID.js"/>  
+    <resource type="download" name="images/" location="/images"/>  
+    <context>AID</context> 
+  </web-resource>  
+  <customfield-type name="New Custom Type" i18n-name-key="new-custom-type.name" key="new-custom-type" class="CustomType.NewCustomType"> 
+    <description key="new-custom-type.description">The New Custom Type Plugin</description>  
+    <resource name="view" type="velocity" location="/templates/customfields/new-custom-type/view.vm"/>  
+    <resource name="edit" type="velocity" location="/templates/customfields/new-custom-type/edit.vm"/> 
+  </customfield-type>  
+  <workflow-condition key="new-start-progress-condition" name="New Start Progress Condition" i18n-name-key="new-start-progress-condition.name" class="Condition.NewStartProgressConditionFactory"> 
+    <description key="new-start-progress-condition.description">The New Start Progress Condition Plugin</description>  
+    <condition-class>Condition.NewStartProgressCondition</condition-class>  
+    <resource type="velocity" name="view" location="templates/conditions/new-start-progress-condition.vm"/>  
+    <resource type="velocity" name="input-parameters" location="templates/conditions/new-start-progress-condition-input.vm"/>  
+    <resource type="velocity" name="edit-parameters" location="templates/conditions/new-start-progress-condition-input.vm"/> 
+  </workflow-condition>  
+  <workflow-function key="on-sub-task-done" name="On Sub Task Done" i18n-name-key="on-sub-task-done.name" class="wFlows.OnSubTaskDoneFactory"> 
+    <description key="on-sub-task-done.description">The On Sub Task Done Plugin</description>  
+    <function-class>wFlows.OnSubTaskDone</function-class>  
+    <resource type="velocity" name="view" location="templates/postfunctions/on-sub-task-done.vm"/>  
+    <resource type="velocity" name="input-parameters" location="templates/postfunctions/on-sub-task-done-input.vm"/>  
+    <resource type="velocity" name="edit-parameters" location="templates/postfunctions/on-sub-task-done-input.vm"/> 
+  </workflow-function>  
+  <customfield-type name="Multi Select Custom Field" i18n-name-key="multi-select-custom-field.name" key="multi-select-custom-field" class="CustomType.MultiSelectCustomField"> 
+    <description key="multi-select-custom-field.description">The Multi Select Custom Field Plugin</description>  
+    <resource name="view" type="velocity" location="/templates/customfields/multi-select-custom-field/view.vm"/>  
+    <resource name="edit" type="velocity" location="/templates/customfields/multi-select-custom-field/edit.vm"/> 
+  </customfield-type>
+  <project-blueprint key="my-project-template" weight="90">
+    <label key="my.project.template.name"/>
+    <projectTypeKey>business</projectTypeKey>
+    <description key="my.project.template.description"/>
+    <longDescription key="my.project.template.description.long"/>
+
+    <infoPage soy-template="JIRA.Templates.ProjectTemplates.Tutorial.renderMyProjectTemplateExplanation" />
+
+    <add-project>
+      <hook class="hook.MyAddProjectHook"/>
+      <descriptor file="/config/config.json"/>
+    </add-project>
+  </project-blueprint>
+
+  <swagger-enforcer key="meRestSwaggerEnforcer">
+    <resource name="my-rest-swagger" type="swagger" location="/config/config.json" />
+  </swagger-enforcer>
+</atlassian-plugin>
